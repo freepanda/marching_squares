@@ -37,7 +37,8 @@ class Cell {
 		}
 
 
-		void render_16cases(Mat&scene, int nb_circles, Point centers[], int radiuses[]) {
+		// linear interpolation
+		void render_by_16cases(Mat&scene, int nb_circles, Point centers[], int radiuses[]) {
 
 			double f1 = vertex_is_in_circles(d1, nb_circles, centers, radiuses);
 			double f2 = vertex_is_in_circles(d2, nb_circles, centers, radiuses);
@@ -57,6 +58,8 @@ class Cell {
 			if(f3 > 1){ num_case+=4; }
 			if(f4 > 1){ num_case+=8; }
 
+
+			// linear interpolation
 			Scalar line_color(0,255,0);
 			switch (num_case) {
 			case 0:
