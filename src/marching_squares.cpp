@@ -58,7 +58,7 @@ int main(void) {
 		for(int r = 0; r < scene.rows; r+=cell_size) {
 			for(int c = 0; c < scene.cols; c+=cell_size) {
 				cell.modify_coordinates(c, r);
-				cell.render_by_16cases(scene, circles_group);
+				cell.draw_by_16cases(scene, circles_group);
 			}
 		}
 

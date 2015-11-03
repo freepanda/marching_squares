@@ -38,7 +38,7 @@ class Cell {
 		}
 
 
-		void render_by_16cases(Mat&scene, vector<Circle>&circles_group) {
+		void draw_by_16cases(Mat&scene, vector<Circle>&circles_group) {
 
 			double f1 = vertex_is_in_circles(d1, circles_group);
 			double f2 = vertex_is_in_circles(d2, circles_group);
