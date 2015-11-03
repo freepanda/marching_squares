@@ -73,7 +73,7 @@ int main(void) {
 		for(int r = 0; r < scene.rows; r+=cell_size) {
 			for(int c = 0; c < scene.cols; c+=cell_size) {
 				cell.modify_coordinates(c, r);
-				cell.render_16cases(scene, nb_circles, centers, radiuses);
+				cell.render_by_16cases(scene, nb_circles, centers, radiuses);
 			}
 		}
 
