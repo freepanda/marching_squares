@@ -6,6 +6,7 @@
  */
 
 #include "opencv2/opencv.hpp"
+#include "circle.cpp"
 
 using namespace cv;
 
@@ -37,15 +38,14 @@ class Cell {
 		}
 
 
-		// linear interpolation
-		void render_by_16cases(Mat&scene, int nb_circles, Point centers[], int radiuses[]) {
+		void render_by_16cases(Mat&scene, vector<Circle>&circles_group) {
 
-			double f1 = vertex_is_in_circles(d1, nb_circles, centers, radiuses);
-			double f2 = vertex_is_in_circles(d2, nb_circles, centers, radiuses);
-			double f3 = vertex_is_in_circles(d3, nb_circles, centers, radiuses);
-			double f4 = vertex_is_in_circles(d4, nb_circles, centers, radiuses);
+			double f1 = vertex_is_in_circles(d1, circles_group);
+			double f2 = vertex_is_in_circles(d2, circles_group);
+			double f3 = vertex_is_in_circles(d3, circles_group);
+			double f4 = vertex_is_in_circles(d4, circles_group);
 
-			/*
+			/* simple interpolation
 			d43.x = d4.x+cell_size/2, d43.y = d4.y;
 			d32.x = d4.x+cell_size; d32.y = d4.y+cell_size/2;
 			d21.x = d4.x+cell_size/2; d21.y = d4.y+cell_size;
@@ -151,11 +151,12 @@ class Cell {
 		Point d43, d32, d21, d14;
 
 		//if result > 1 => vertex in circles
-		double vertex_is_in_circles(Point &vertex, int nb_circles, Point centers[], int radiuses[]) {
+		double vertex_is_in_circles( Point&vertex, vector<Circle>&circles_group ) {
 			double result = 0;
-			for(int i = 0; i < nb_circles; i++) {
-				Point center = centers[i];
-				int radius = radiuses[i];
+			for(vector<Circle>::iterator it = circles_group.begin(), itend = circles_group.end(); it != itend; it++) {
+				Point center = it->center;
+				int radius = it->radius;
+				//it is not good to use "sqrt"
 				result += (double)pow(radius, 2)/(pow(vertex.y-center.y,2)+pow(vertex.x-center.x,2));
 			}
 			return result;
