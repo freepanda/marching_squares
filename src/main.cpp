@@ -15,7 +15,7 @@ using namespace cv;
 using namespace std;
 
 //#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\""   );
-int main(void) {
+int main() {
 
 	Mat scene(600, 1000, CV_8UC3, Scalar(0,0,0));
 	int cell_size = 40;
